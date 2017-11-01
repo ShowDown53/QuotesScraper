@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import random
 from urllib2 import urlopen
 from BeautifulSoup import BeautifulSoup
 
@@ -15,7 +16,18 @@ citati = parse.findAll("p", attrs={"class": "quoteContent"})
 i = 1
 for x in citati:
     if i <= 5:
-        print str(i) + ". " + x.string.lstrip(' ') # lstrip sem uporabil, ker so določeni citati imeli presledek na začetku citata
+        print str(i) + ". " + x.string.lstrip(' ') # lstrip sem uporabil, ker so določeni citati imeli presledek na začetku
         i += 1
+    else:
+        break
+
+print "Bonus random quote: " + random.choice(citati).string + "\n"
+
+print "Here are some extra random quotes: "
+t = 1
+for x in citati:
+    if t <= 5:
+        print str(t) + ". " + random.choice(citati).string.lstrip(' ')
+        t += 1
     else:
         break
