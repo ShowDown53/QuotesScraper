@@ -11,23 +11,18 @@ parse = BeautifulSoup(response)
 
 print "Cheesy " + parse.html.head.title.string.lower() + " just for you:"
 
-citati = parse.findAll("p", attrs={"class": "quoteContent"})
+citati = parse.findAll("p", attrs={"class": "quoteContent"}, limit=5)
 
 i = 1
 for x in citati:
-    if i <= 5:
-        print str(i) + ". " + x.string.lstrip(' ') # lstrip sem uporabil, ker so določeni citati imeli presledek na začetku
-        i += 1
-    else:
-        break
+    print str(i) + ". " + x.string.lstrip(' ') # lstrip sem uporabil, ker so določeni citati imeli presledek na začetku
+    i += 1
 
 print "Bonus random quote: " + random.choice(citati).string + "\n"
 
 print "Here are some extra random quotes: "
 t = 1
-for x in citati:
-    if t <= 5:
-        print str(t) + ". " + random.choice(citati).string.lstrip(' ')
-        t += 1
-    else:
-        break
+for x in random.sample(citati, 5):
+    print str(t) + ". " + x.string.lstrip()
+    t += 1
+
